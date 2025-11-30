@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Task Analyzer</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div class="app-container">
+    <header>
+        <h1>Smart Task Analyzer</h1>
+        <p>Intelligent task prioritization for faster decision-making.</p>
+    </header>
+
+    <main class="layout">
+       <section class="panel left-panel">
+    <h2>Task Input</h2>
+
+    <div class="task-form">
+        <h3>Add Single Task</h3>
+        <div class="form-row">
+            <label>Title *</label>
+            <input type="text" id="formTitle" placeholder="Finish assignment">
+        </div>
+
+        <div class="form-row">
+            <label>Due Date</label>
+            <input type="date" id="formDueDate">
+        </div>
+
+        <div class="form-row two-col">
+    <div class="field-group">
+        <label>Importance (1–10)</label>
+        <input type="number" id="formImportance" min="1" max="10" placeholder="7">
+    </div>
+
+    <div class="field-group">
+        <label>Estimated Hours</label>
+        <input type="number" id="formHours" min="1" placeholder="2">
+    </div>
+</div>
+
+
+        <div class="form-row">
+            <label>Dependencies (IDs, comma-separated)</label>
+            <input type="text" id="formDependencies" placeholder="e.g. 1, 2">
+        </div>
+
+        <button id="addTaskBtn" type="button">Add Task to List</button>
+
+        <p class="built-info" id="builtTasksInfo">No tasks added from form yet.</p>
+    </div>
+
+    <hr class="divider">
+
+    <p class="hint">
+        Or paste a JSON array of tasks here:
+    </p>
+
+            <pre class="example">
+[
+  {
+    "title": "Finish assignment",
+    "due_date": "2025-12-05",
+    "importance": 9,
+    "estimated_hours": 3,
+    "dependencies": []
+  },
+  {
+    "title": "Clean room",
+    "due_date": "2025-12-20",
+    "importance": 4,
+    "estimated_hours": 1,
+    "dependencies": []
+  }
+]
+            </pre>
+
+            <textarea id="taskInput" placeholder="Paste your JSON array of tasks here..."></textarea>
+
+            <div class="controls">
+                <button id="analyzeBtn">Analyze Tasks</button>
+                <button id="suggestBtn" class="secondary">Get Top 3 From DB</button>
+
+                <div class="strategy">
+                    <label for="strategySelect">Sorting Strategy (visual only for now):</label>
+                    <select id="strategySelect">
+                        <option value="smart">Smart Balance (default)</option>
+                        <option value="deadline">Deadline Driven</option>
+                        <option value="quick">Fastest Wins</option>
+                        <option value="impact">High Impact First</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="statusMessage" class="status"></div>
+        </section>
+        
+        <section class="panel right-panel">
+            <h2>Results</h2>
+            <div id="resultsContainer" class="results">
+                <p class="placeholder">
+                    Results will appear here after you click "Analyze Tasks" or "Get Top 3 From DB".
+                </p>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
